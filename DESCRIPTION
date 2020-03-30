@@ -1,0 +1,33 @@
+Package: teberda.tools
+Type: Package
+Title: Teberda grasslands Estimation and Visualisation Tools
+Version: 0.1.0
+Authors@R: person("Daria", "Sukhova", email = "daria.sukhova@gmail.com",
+  role = c("aut", "cre"))
+Author: Daria Sukhova [aut, cre]
+Maintainer: Daria Sukhova <daria.sukhova@gmail.com>
+Description: This package contains tools for making exploratory statistic estimations
+    and visualisation of their results. The data contains vegetative and generative 
+    shoot numbers per sample per year in the grasslands of Teberdinsky State Natural 
+    Biosphere Reserve.
+    The data must be organized in .csv files with the structure like it is 
+    in "extdata/" directory files in this package.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Dependens: R (>= 3.6.0)
+Import:
+    stringr,
+    reshape2,
+    dplyr,
+    ggplot2,
+    forcats,
+    purrr,
+    tibble,
+    colorspace,
+    extrafont,
+    tidyverse,
+    magrittr,
+    nlme,
+    ggpubr
+RoxygenNote: 7.1.0
