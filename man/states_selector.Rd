@@ -2,16 +2,16 @@
 % Please edit documentation in R/get_tidy_data.R
 \name{states_selector}
 \alias{states_selector}
-\title{Function for selection the state of shoots if any.
-Checks what state(s) should be selected and makes data frame for it (or them together)}
+\title{states_selector()}
 \usage{
 states_selector(long_table, state = NULL)
 }
 \arguments{
 \item{long_table}{From get_long_table().}
 
-\item{state}{"g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile. Default to NULL.
-states_selector()}
+\item{state}{Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
+Which states should be selected. If NULL, all shoots will be selected.
+Dafault to NULL.}
 }
 \description{
 Function for selection the state of shoots if any.

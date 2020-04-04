@@ -15,7 +15,7 @@ get_tidy_data(csv_file, need_abbr = FALSE, state = NULL)
 
 \item{need_abbr}{Boolean, if it is needed to abbtriviate species names. Default to FALSE.}
 
-\item{state}{State of shoots. Can be NULL for all states of shoots, 
+\item{state}{State of shoots. Can be NULL for all states of shoots,
 "g" for generative,
 "v" for vegetative,
 "v+j" for vegetative and juvenile.

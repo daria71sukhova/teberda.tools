@@ -69,12 +69,15 @@ get_without_zeros <- function(transponed_df){
   return(without_zeros)
 }
 
-#' Function for selection the state of shoots if any.
+#' @title states_selector()
+#' @description Function for selection the state of shoots if any.
 #' Checks what state(s) should be selected and makes data frame for it (or them together)
 #' @import dplyr
 #' @param long_table From get_long_table().
-#' @param state "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile. Default to NULL.
-#' states_selector()
+#' @param state  Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
+#'  Which states should be selected. If NULL, all shoots will be selected.
+#'  Dafault to NULL.
+
 states_selector <- function(long_table, state = NULL){
   long_table$species <- as.character(long_table$species) # to avoid factors in our lists
   if(!is.null(state)){
@@ -170,7 +173,7 @@ states_selector <- function(long_table, state = NULL){
 #'    Rows contain shoot numbers of species for a year.
 #' @param csv_file Name of .csv file containes raw data. No default.
 #' @param need_abbr Boolean, if it is needed to abbtriviate species names. Default to FALSE.
-#' @param state State of shoots. Can be NULL for all states of shoots, 
+#' @param state State of shoots. Can be NULL for all states of shoots,
 #' "g" for generative,
 #' "v" for vegetative,
 #' "v+j" for vegetative and juvenile.
