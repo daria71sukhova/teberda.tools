@@ -23,11 +23,13 @@ Import:
     ggplot2,
     forcats,
     purrr,
+    tydir,
     tibble,
     colorspace,
     extrafont,
     tidyverse,
     magrittr,
     nlme,
-    ggpubr
+    ggpubr,
+    Hmisc
 RoxygenNote: 7.1.0

@@ -166,20 +166,9 @@ states_selector <- function(long_table, state = NULL){
 
 }
 
-#' Takes .csv file
-#' Returns tidy wide table with selected types of shoots:
-#'    columns are species' sums of shoot numbers per a year for all samples.
-#'    The first column is named "year", containes years.
-#'    Rows contain shoot numbers of species for a year.
-#' @param csv_file Name of .csv file containes raw data. No default.
-#' @param need_abbr Boolean, if it is needed to abbtriviate species names. Default to FALSE.
-#' @param state State of shoots. Can be NULL for all states of shoots,
-#' "g" for generative,
-#' "v" for vegetative,
-#' "v+j" for vegetative and juvenile.
-#' Default to NULL.
-#' @export
-get_tidy_data <- function(csv_file, need_abbr = FALSE, state = NULL){
+# Takes .csv file with data
+# Returns tidy wide table
+get_tidy <- function(csv_file, need_abbr = FALSE, state = NULL){
   raw_df <- read.csv(csv_file, h=T)
   if(isTRUE(need_abbr)){
     abbr_df <- raw_df
@@ -193,4 +182,46 @@ get_tidy_data <- function(csv_file, need_abbr = FALSE, state = NULL){
   wide_t_df <- get_wide_transponed(long_df_sum)
   wide_t_df <- get_without_zeros(wide_t_df)
   return(wide_t_df)
+}
+
+
+
+# Takes two data files which shoot numbers must be united
+high_plus_low <- function(csv_file, csv_file_2, need_abbr = NULL, state = NULL){
+  high_df <- get_tidy(csv_file, need_abbr, state)
+  low_df <- get_tidy(csv_file2, need_abbr, state)
+  high_intersect_df <- high_df[intersect(rownames(high_df),
+                                         rownames(low_df)),
+                               intersect(colnames(high_df),
+                                         colnames(low_df))]
+  low_intersect_df <- low_df[intersect(rownames(high_df),
+                                       rownames(low_df)),
+                             intersect(colnames(high_df),
+                                       colnames(low_df))]
+  year <- high_intersect_df[, 1]
+  intersect_df_sum <- high_intersect_df[, -1] + low_intersect_df[, -1]
+  intersect_df_sum <- cbind(year, intersect_df_sum)
+  return(intersect_df_sum)
+}
+
+#' Takes one ore two .csv files
+#' Returns tidy wide table with selected types of shoots:
+#'    columns are species' sums of shoot numbers per a year for all samples.
+#'    The first column is named "year", containes years.
+#'    Rows contain shoot numbers of species for a year.
+#' @param csv_file Name of .csv file containes raw data. No default.
+#' @param csv_file_2 Name of second .csv file to be united with the first one.
+#' It must be checked, that the data are from the SAME period.
+#' Default to NULL
+#' @param need_abbr Boolean, if it is needed to abbtriviate species names. Default to FALSE.
+#' @param state State of shoots. Can be NULL for all states of shoots,
+#' "g" for generative,
+#' "v" for vegetative,
+#' "v+j" for vegetative and juvenile.
+#' Default to NULL.
+#' @export
+get_tidy_data <- function(csv_file, csv_file_2 = NULL, need_abbr = FALSE, state = NULL){
+  if(!is.null(csv_file_2)){
+    return(high_plus_low(csv_file, csv_file_2, need_abbr, state))
+  } else { return(get_tidy(csv_file, need_abbr, state))}
 }

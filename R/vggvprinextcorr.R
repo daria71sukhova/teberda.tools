@@ -84,6 +84,9 @@ get_corr_pValue <- function(corr_test_list){
 #' Also the correlations can be estimated for generative and vegetative shoot numbers
 #' of the same year (default behavior).
 #' @param data_file Name of .csv file with data. No defaults.
+#' @param data_file_2 Name of second .csv file to be united with the first one.
+#' It must be checked, that the data are from the SAME period.
+#' Default to NULL
 #' @param comparing_mod Key signs which modification of test should be done.
 #'   It can be:
 #'     "g_vs_pyv" number of generative shoots with prior-year number of vegetative shoots
@@ -97,7 +100,7 @@ get_corr_pValue <- function(corr_test_list){
 #'  for species to be taken into consideration. Default to 0.05.
 #' @return Data frame with correlation coefficients.
 #' @export
-vggvprinextcorr <- function(data_file, comparing_mod = "v_vs_g", method = "spearman", pVal = .05){
+vggvprinextcorr <- function(data_file, data_file_2 = NULL, comparing_mod = "v_vs_g", method = "spearman", pVal = .05){
   # data_file is .csv file with numbers of shoots
   # comparing_mode is key signs which modification of test should be done.
   # It can be:
@@ -110,11 +113,11 @@ vggvprinextcorr <- function(data_file, comparing_mod = "v_vs_g", method = "spear
 
   # preparations
   # generative shoots
-  df_g <- get_tidy_data(data_file, state = "g")
+  df_g <- get_tidy_data(data_file, data_file_2, state = "g")
   df_g_sp <- df_g[, 2:ncol(df_g)]
 
   # vegetative shoots
-  df_v <- get_tidy_data(data_file, state = "v")
+  df_v <- get_tidy_data(data_file, data_file_2, state = "v")
   df_v_sp <- df_v[, 2:ncol(df_v)]
 
   # ajasting lists of species

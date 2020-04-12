@@ -52,6 +52,9 @@ gls_regcoef_and_se_scaled <- function(model_sum_list_scaled){
 
 #' @title ltrend
 #' @param data_file Name of .csv file with data. No defaults.
+#' @param data_file_2 Name of second .csv file to be united with the first one.
+#' It must be checked, that the data are from the SAME period.
+#' Default to NULL
 #' @param number_of_plots Number of 1square meter plots in sampled area. No defaults
 #' @param need_abbr Boolean. Whether species names should be abbreviated. Default to FALSE.
 #' @param state Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
@@ -65,13 +68,14 @@ gls_regcoef_and_se_scaled <- function(model_sum_list_scaled){
 #' @export
 
 ltrend <- function(data_file,
+                   data_file_2 = NULL,
                    number_of_plots,
                    need_abbr = FALSE,
                    state = NULL,
                    threshold_mean = 3.2,
                    pVal = 0.05){
   # read data
-  wide_t_df <- get_tidy_data(data_file, need_abbr, state)
+  wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state)
 
   # get mean number of shoots per 10 square meters
   mean_sh_num_10 <- get_mean_shoot_number_10(wide_t_df, number_of_plots)

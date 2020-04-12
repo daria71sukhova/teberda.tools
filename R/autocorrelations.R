@@ -84,12 +84,13 @@ get_Lju_Box_test_pval <- function(sp_ts, most_sign_lag){
 #' @export
 
 autocor_max_lag_table <- function(data_file,
+                                  data_file_2 = NULL,
                                   number_of_plots,
                                   need_abbr = FALSE,
                                   state = NULL,
                                   mean_threshold = 3.2,
                                   pVal = .05){
-  wide_t_df <- get_tidy_data(data_file, need_abbr, state)
+  wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state)
 
   # Estimate variation coeffficient
   mean_sh_num_10 <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
@@ -126,8 +127,8 @@ autocor_max_lag_table <- function(data_file,
 #'  for species to be taken into consideration. Default to 0.05.
 #' @return Data frame with autocorrelation coefficients for maximum lag value.
 #' @export
-autocor_1_order_table  <- function(data_file, number_of_plots, need_abbr = FALSE, state = NULL, pVal = .05){
-  wide_t_df <- get_tidy_data(data_file, need_abbr, state)
+autocor_1_order_table  <- function(data_file, data_file_2 = NULL, number_of_plots, need_abbr = FALSE, state = NULL, pVal = .05){
+  wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state)
   mean_sh_num_10 <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
   sp_ts <- get_ts(wide_t_df)
   autocorr_lag_1 <- get_autocorr_1(sp_ts)
@@ -148,6 +149,9 @@ autocor_1_order_table  <- function(data_file, number_of_plots, need_abbr = FALSE
 
 #' @title autocorrelations
 #' @param data_file Name of .csv file with data. No defaults.
+#' @param data_file_2 Name of second .csv file to be united with the first one.
+#' It must be checked, that the data are from the SAME period.
+#' Default to NULL
 #' @param what_autocorr What lag we need. "max_lag" or "order_1". Default to "max_lag".
 #' @param number_of_plots Number of 1square meter plots in sampled area. No defaults
 #' @param need_abbr Boolean. Whether species names should be abbreviated. Default to FALSE.
@@ -161,6 +165,7 @@ autocor_1_order_table  <- function(data_file, number_of_plots, need_abbr = FALSE
 #' @return Data frame with autocorrelation coefficients for maximum lag value.
 #' @export
 autocorrelations <- function(data_file,
+                             data_file_2 = NULL,
                              what_autocorr = "max_lag",
                              number_of_plots,
                              need_abbr = FALSE,
@@ -168,12 +173,14 @@ autocorrelations <- function(data_file,
                              mean_threshold = 3.2,
                              pVal = .05){
   if(what_autocorr == "max_lag"){ return(autocor_max_lag_table(data_file,
+                                                               data_file_2,
                                                                number_of_plots,
                                                                need_abbr,
                                                                state,
                                                                mean_threshold,
                                                                pVal)) }
   else { return(autocor_1_order_table(data_file,
+                                      data_file_2,
                                       number_of_plots,
                                       need_abbr,
                                       state,
