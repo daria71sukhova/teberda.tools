@@ -80,7 +80,8 @@ get_Lju_Box_test_pval <- function(sp_ts, most_sign_lag){
 #'  for species to be taken into consideration. Default to 3.2.
 #' @param pVal Number (0.05, 0.01 or less). p-value of Ljung-Box test
 #'  for species to be taken into consideration. Default to 0.05.
-#' @return Data frame with autocorrelation coefficients for maximum lag value.
+#' @return Data frame with autocorrelation coefficients for maximum lag value,
+#' where lag > 1.
 #' @export
 
 autocor_max_lag_table <- function(data_file,
@@ -110,7 +111,7 @@ autocor_max_lag_table <- function(data_file,
                             lag = most_sign_lag,
                             R = round(max_acf_sp_ts, 3),
                             p_value = round(box_result_p_val, 3))
-  pivot_table <- subset(pivot_table, Mean > mean_threshold & p_value < pVal)
+  pivot_table <- subset(pivot_table, Mean > mean_threshold & p_value < pVal & lag > 1)
   return(pivot_table)
 }
 
