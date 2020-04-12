@@ -6,6 +6,7 @@
 \usage{
 autocor_max_lag_table(
   data_file,
+  data_file_2 = NULL,
   number_of_plots,
   need_abbr = FALSE,
   state = NULL,
@@ -31,7 +32,8 @@ for species to be taken into consideration. Default to 3.2.}
 for species to be taken into consideration. Default to 0.05.}
 }
 \value{
-Data frame with autocorrelation coefficients for maximum lag value.
+Data frame with autocorrelation coefficients for maximum lag value,
+where lag > 1.
 }
 \description{
 autocor_max_lag_table

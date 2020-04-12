@@ -189,7 +189,7 @@ get_tidy <- function(csv_file, need_abbr = FALSE, state = NULL){
 # Takes two data files which shoot numbers must be united
 high_plus_low <- function(csv_file, csv_file_2, need_abbr = NULL, state = NULL){
   high_df <- get_tidy(csv_file, need_abbr, state)
-  low_df <- get_tidy(csv_file2, need_abbr, state)
+  low_df <- get_tidy(csv_file_2, need_abbr, state)
   high_intersect_df <- high_df[intersect(rownames(high_df),
                                          rownames(low_df)),
                                intersect(colnames(high_df),

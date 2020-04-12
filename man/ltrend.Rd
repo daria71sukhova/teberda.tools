@@ -6,6 +6,7 @@
 \usage{
 ltrend(
   data_file,
+  data_file_2 = NULL,
   number_of_plots,
   need_abbr = FALSE,
   state = NULL,
@@ -15,6 +16,10 @@ ltrend(
 }
 \arguments{
 \item{data_file}{Name of .csv file with data. No defaults.}
+
+\item{data_file_2}{Name of second .csv file to be united with the first one.
+It must be checked, that the data are from the SAME period.
+Default to NULL}
 
 \item{number_of_plots}{Number of 1square meter plots in sampled area. No defaults}
 

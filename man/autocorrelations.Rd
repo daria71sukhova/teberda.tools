@@ -6,6 +6,7 @@
 \usage{
 autocorrelations(
   data_file,
+  data_file_2 = NULL,
   what_autocorr = "max_lag",
   number_of_plots,
   need_abbr = FALSE,
@@ -16,6 +17,10 @@ autocorrelations(
 }
 \arguments{
 \item{data_file}{Name of .csv file with data. No defaults.}
+
+\item{data_file_2}{Name of second .csv file to be united with the first one.
+It must be checked, that the data are from the SAME period.
+Default to NULL}
 
 \item{what_autocorr}{What lag we need. "max_lag" or "order_1". Default to "max_lag".}
 

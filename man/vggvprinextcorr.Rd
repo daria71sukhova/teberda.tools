@@ -6,6 +6,7 @@
 \usage{
 vggvprinextcorr(
   data_file,
+  data_file_2 = NULL,
   comparing_mod = "v_vs_g",
   method = "spearman",
   pVal = 0.05
@@ -13,6 +14,10 @@ vggvprinextcorr(
 }
 \arguments{
 \item{data_file}{Name of .csv file with data. No defaults.}
+
+\item{data_file_2}{Name of second .csv file to be united with the first one.
+It must be checked, that the data are from the SAME period.
+Default to NULL}
 
 \item{comparing_mod}{Key signs which modification of test should be done.
 It can be:

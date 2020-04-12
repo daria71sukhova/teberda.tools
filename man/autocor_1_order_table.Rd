@@ -6,6 +6,7 @@
 \usage{
 autocor_1_order_table(
   data_file,
+  data_file_2 = NULL,
   number_of_plots,
   need_abbr = FALSE,
   state = NULL,
