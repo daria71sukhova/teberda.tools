@@ -180,12 +180,14 @@ autocorrelations <- function(data_file,
                                                                state,
                                                                mean_threshold,
                                                                pVal)) }
-  else { return(autocor_1_order_table(data_file,
+  else {
+    if(what_autocorr == "order_1"){return(autocor_1_order_table(data_file,
                                       data_file_2,
                                       number_of_plots,
                                       need_abbr,
                                       state,
                                       mean_threshold,
                                       pVal)) }
+  }
 }
 
