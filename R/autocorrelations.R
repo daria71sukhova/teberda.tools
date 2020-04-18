@@ -89,6 +89,7 @@ autocor_max_lag_table <- function(data_file,
                                   number_of_plots,
                                   need_abbr = FALSE,
                                   state = NULL,
+                                  maxLag = 1,
                                   mean_threshold = 3.2,
                                   pVal = .05){
   wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state)
@@ -111,7 +112,7 @@ autocor_max_lag_table <- function(data_file,
                             lag = most_sign_lag,
                             R = round(max_acf_sp_ts, 3),
                             p_value = round(box_result_p_val, 3))
-  pivot_table <- subset(pivot_table, Mean > mean_threshold & p_value < pVal & lag > 1)
+  pivot_table <- subset(pivot_table, Mean > mean_threshold & p_value < pVal & lag > maxLag)
   return(pivot_table)
 }
 
@@ -128,7 +129,13 @@ autocor_max_lag_table <- function(data_file,
 #'  for species to be taken into consideration. Default to 0.05.
 #' @return Data frame with autocorrelation coefficients for maximum lag value.
 #' @export
-autocor_1_order_table  <- function(data_file, data_file_2 = NULL, number_of_plots, need_abbr = FALSE, state = NULL, pVal = .05){
+autocor_1_order_table  <- function(data_file,
+                                   data_file_2 = NULL,
+                                   number_of_plots,
+                                   need_abbr = FALSE,
+                                   state = NULL,
+                                   mean_threshold = 3.2,
+                                   pVal = .05){
   wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state)
   mean_sh_num_10 <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
   sp_ts <- get_ts(wide_t_df)
@@ -136,7 +143,9 @@ autocor_1_order_table  <- function(data_file, data_file_2 = NULL, number_of_plot
   box_result <- lapply(1:ncol(sp_ts), function(x) Box.test(sp_ts[,x],
                                                            lag = 1,
                                                            type="Ljung-Box"))
-  box_result_p_val <-sapply(1:length(box_result), function(x) box_result[[x]][["p.value"]])
+  box_result_p_val <-sapply(1:length(box_result),
+                            function(x)
+                              box_result[[x]][["p.value"]])
   spec_names <- colnames(wide_t_df)[2:ncol(wide_t_df)]
   pivot_table <- data.frame(Species = spec_names,
                             Mean = round(mean_sh_num_10),
@@ -144,7 +153,7 @@ autocor_1_order_table  <- function(data_file, data_file_2 = NULL, number_of_plot
                             R = round(autocorr_lag_1, 3),
                             p_value = round(box_result_p_val, 3)
   )
-  pivot_table <- subset(pivot_table, Mean > 3.2 & p_value < pVal)
+  pivot_table <- subset(pivot_table, Mean > mean_threshold & p_value < pVal)
   return(pivot_table)
 }
 
@@ -153,24 +162,26 @@ autocor_1_order_table  <- function(data_file, data_file_2 = NULL, number_of_plot
 #' @param data_file_2 Name of second .csv file to be united with the first one.
 #' It must be checked, that the data are from the SAME period.
 #' Default to NULL
-#' @param what_autocorr What lag we need. "max_lag" or "order_1". Default to "max_lag".
+#' @param what_autocorr What lag we need. "max_lag" or "order_1". No default.
 #' @param number_of_plots Number of 1square meter plots in sampled area. No defaults
 #' @param need_abbr Boolean. Whether species names should be abbreviated. Default to FALSE.
-#' @param state Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
+#' @param state Character: "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
 #'  Which states should be selected. If NULL, all shoots will be selected.
 #'  Dafault to NULL.
-#' @param mean_threshold Number. Mean shoot number threshhold
-#'  for species to be taken into consideration. Default to 3.2.
+#' @param maxLag Treshold value of maximum lag. Numeric. Default to 1.
+#' @param mean_threshold Mean shoot number threshhold
+#'  for species to be taken into consideration. Numeric. Default to 3.2.
 #' @param pVal Number (0.05, 0.01 or less). p-value of Ljung-Box test
 #'  for species to be taken into consideration. Default to 0.05.
 #' @return Data frame with autocorrelation coefficients for maximum lag value.
 #' @export
 autocorrelations <- function(data_file,
                              data_file_2 = NULL,
-                             what_autocorr = "max_lag",
+                             what_autocorr,
                              number_of_plots,
                              need_abbr = FALSE,
                              state = NULL,
+                             maxLag = 1,
                              mean_threshold = 3.2,
                              pVal = .05){
   if(what_autocorr == "max_lag"){ return(autocor_max_lag_table(data_file,
@@ -178,6 +189,7 @@ autocorrelations <- function(data_file,
                                                                number_of_plots,
                                                                need_abbr,
                                                                state,
+                                                               maxLag,
                                                                mean_threshold,
                                                                pVal)) }
   else {
@@ -186,7 +198,6 @@ autocorrelations <- function(data_file,
                                       number_of_plots,
                                       need_abbr,
                                       state,
-                                      mean_threshold,
                                       pVal)) }
   }
 }

@@ -7,10 +7,11 @@
 autocorrelations(
   data_file,
   data_file_2 = NULL,
-  what_autocorr = "max_lag",
+  what_autocorr,
   number_of_plots,
   need_abbr = FALSE,
   state = NULL,
+  maxLag = 1,
   mean_threshold = 3.2,
   pVal = 0.05
 )
@@ -22,18 +23,20 @@ autocorrelations(
 It must be checked, that the data are from the SAME period.
 Default to NULL}
 
-\item{what_autocorr}{What lag we need. "max_lag" or "order_1". Default to "max_lag".}
+\item{what_autocorr}{What lag we need. "max_lag" or "order_1". No default.}
 
 \item{number_of_plots}{Number of 1square meter plots in sampled area. No defaults}
 
 \item{need_abbr}{Boolean. Whether species names should be abbreviated. Default to FALSE.}
 
-\item{state}{Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
+\item{state}{Character: "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
 Which states should be selected. If NULL, all shoots will be selected.
 Dafault to NULL.}
 
-\item{mean_threshold}{Number. Mean shoot number threshhold
-for species to be taken into consideration. Default to 3.2.}
+\item{maxLag}{Treshold value of maximum lag. Numeric. Default to 1.}
+
+\item{mean_threshold}{Mean shoot number threshhold
+for species to be taken into consideration. Numeric. Default to 3.2.}
 
 \item{pVal}{Number (0.05, 0.01 or less). p-value of Ljung-Box test
 for species to be taken into consideration. Default to 0.05.}

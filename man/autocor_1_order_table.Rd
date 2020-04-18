@@ -10,6 +10,7 @@ autocor_1_order_table(
   number_of_plots,
   need_abbr = FALSE,
   state = NULL,
+  mean_threshold = 3.2,
   pVal = 0.05
 )
 }
@@ -24,11 +25,11 @@ autocor_1_order_table(
 Which states should be selected. If NULL, all shoots will be selected.
 Dafault to NULL.}
 
-\item{pVal}{Number (0.05, 0.01 or less). p-value of Ljung-Box test
-for species to be taken into consideration. Default to 0.05.}
-
 \item{mean_threshold}{Number. Mean shoot number threshhold
 for species to be taken into consideration. Default to 3.2.}
+
+\item{pVal}{Number (0.05, 0.01 or less). p-value of Ljung-Box test
+for species to be taken into consideration. Default to 0.05.}
 }
 \value{
 Data frame with autocorrelation coefficients for maximum lag value.

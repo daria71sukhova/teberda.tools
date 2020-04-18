@@ -10,6 +10,7 @@ autocor_max_lag_table(
   number_of_plots,
   need_abbr = FALSE,
   state = NULL,
+  maxLag = 1,
   mean_threshold = 3.2,
   pVal = 0.05
 )
