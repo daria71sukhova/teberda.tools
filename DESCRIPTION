@@ -8,8 +8,8 @@ Author: Daria Sukhova [aut, cre]
 Maintainer: Daria Sukhova <daria.sukhova@gmail.com>
 Description: This package contains tools for making exploratory statistic estimations
     and visualisation of their results. The data contains vegetative and generative 
-    shoot numbers per sample per year in the grasslands of Teberdinsky State Natural 
-    Biosphere Reserve.
+    shoot numbers per sample per year in the grasslands of Teberda Reserve, NW Cau-
+casus, Russia.
     The data must be organized in .csv files with the structure like it is 
     in "extdata/" directory files in this package.
 License: MIT + file LICENSE
