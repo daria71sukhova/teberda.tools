@@ -1,2 +1,3 @@
 # teberda.tools 
-# Utilities for exploratory statistic on data from Teberda mountain grasslsnds
+# Utilities for exploratory statistic on data from Teberda mountain grasslands
+
