@@ -1,3 +1,14 @@
+# Function takes species' names and cleaves dot from its start, if it is.
+get_sp_fullnames <- function(sp_name){
+  if(!grep("^\\.", sp_name)){
+    sp_f_name <- sp_name
+  } else {
+    sp_f_name <- sub("^\\.", "", sp_name)
+  }
+  return(sp_f_name)
+}
+
+
 #' This function allows to get abbreviations of species' names
 #' @param sp_name A vector of full latin species names with authors. No defaults.
 #' @param start1 A number for starting symbol in the abbriviation of the genus. Defaults to 1.
@@ -5,7 +16,7 @@
 #' @param end1 A number for ending symbol in the abbriviation of the first word. Default to 4.
 #' @param end2 A number for ending symbol in the abbriviation of the second word. Default to 7.
 #' @importFrom stringr str_split str_sub
-get_abbr <- function(sp_name, start1 = 1, end1 = 4, start2 = 2, end2 = 7){
+get_abbr <- function(sp_name, start1 = 1, end1 = 3, start2 = 1, end2 = 7){
   spec_abbr <- stringr::str_split(sp_name, " ")
   spec_abbr <- sapply(spec_abbr, stringr::str_sub, start1, end1)
   spec_abbr <- sapply(spec_abbr, paste, collapse = "")
@@ -170,6 +181,7 @@ states_selector <- function(long_table, state = NULL){
 # Returns tidy wide table
 get_tidy <- function(csv_file, need_abbr = FALSE, state = NULL){
   raw_df <- read.csv(csv_file, h=T)
+  raw_df$species  <- sapply(raw_df$species, get_sp_fullnames)
   if(isTRUE(need_abbr)){
     abbr_df <- raw_df
     abbr_df$species <- get_abbr(abbr_df$species)
