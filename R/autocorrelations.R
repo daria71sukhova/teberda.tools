@@ -173,7 +173,8 @@ autocor_1_order_table  <- function(data_file,
 #'  for species to be taken into consideration. Numeric. Default to 3.2.
 #' @param pVal Number (0.05, 0.01 or less). p-value of Ljung-Box test
 #'  for species to be taken into consideration. Default to 0.05.
-#' @return Data frame with autocorrelation coefficients for maximum lag value.
+#' @return Dependent on what_autocorr parameter, data frame with autocorrelation coefficients
+#'  for maximum lag value or the first order autocorrelation coeffitients.
 #' @export
 autocorrelations <- function(data_file,
                              data_file_2 = NULL,

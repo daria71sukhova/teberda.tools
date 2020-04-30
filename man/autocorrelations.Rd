@@ -42,7 +42,8 @@ for species to be taken into consideration. Numeric. Default to 3.2.}
 for species to be taken into consideration. Default to 0.05.}
 }
 \value{
-Data frame with autocorrelation coefficients for maximum lag value.
+Dependent on what_autocorr parameter, data frame with autocorrelation coefficients
+ for maximum lag value or the first order autocorrelation coeffitients.
 }
 \description{
 autocorrelations
