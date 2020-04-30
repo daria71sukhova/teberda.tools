@@ -9,7 +9,7 @@ Utilities for exploratory analysis on a dynamic of the species shoot number at t
 ## Getting started
 You may download the .zip file with the package and install from your local machin or you can install it directly from GitHub.
 ### Installation
-To install package from local source file (.zip archive) you sould do:
+To install package from local source file (.zip archive) you should do:
 ```
 install.packages("path/to/your/source/file", repos = NULL, type = "source")
 ```
@@ -17,7 +17,7 @@ Example:
 ```
 install.packages("~/Downloads/teberda.tools.zip", repos = NULL, type = "source")
 ```
-To install the package from GitHub directly you should have devtools package installed and loaded first:
+To install the package from GitHub directly you should have ```devtools``` package installed and loaded first:
 ```
 install.packages("devtools")
 library(devtools)
@@ -32,15 +32,16 @@ As you always do, load the package in order to start using it:
 library(teberda.tools)
 ```
 Several commands are now available to you:
--ltrend: gives you the table with species which show significant linear trends 
 
--autocorrelations: gives you the table with species which have significant values of autocorrelatons
+```ltrend``` gives you the table with species which show significant linear trends 
 
--speccor: gives the correlation matrix with significant values
+```autocorrelations``` gives you the table with species which have significant values of autocorrelatons
 
--vggvprinextcorr: gives the table with the species which have significant correlations between number of generative shoots of the previous year and number of vegetative shoots of the current year and vise versa
+```speccor``` gives the correlation matrix with significant values
 
--get_tidy_data: gives the wide tidy dataframe with years in the first column and  number of shoots of the species in the rest
+```vggvprinextcorr``` gives the table with the species which have significant correlations between number of generative shoots of the previous year and number of vegetative shoots of the current year and vise versa
 
-Look into man pages for detailes
+```get_tidy_data``` gives the wide tidy dataframe with years in the first column and  number of shoots of the species in the rest
+
+Look into help pages for the detailes.
 
