@@ -1,5 +1,5 @@
 # teberda.tools 
-Utilities for exploratory analysis on a dynamic of the species shoot number at the Teberda mountain grasslands:
+Utilities for exploratory analysis of the dynamics of the number of species in the mountain meadows of Teberda:
 - linear trends
 - autocorrelations
 - correlations between the number of generative shoots of the previous year and the number of vegetative shoots of the current year and vice versa
