@@ -4,7 +4,7 @@
 \alias{get_abbr}
 \title{This function allows to get abbreviations of species' names}
 \usage{
-get_abbr(sp_name, start1 = 1, end1 = 4, start2 = 2, end2 = 7)
+get_abbr(sp_name, start1 = 1, end1 = 3, start2 = 1, end2 = 7)
 }
 \arguments{
 \item{sp_name}{A vector of full latin species names with authors. No defaults.}
