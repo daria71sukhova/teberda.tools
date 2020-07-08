@@ -108,4 +108,5 @@ ltrend <- function(data_file,
   trends_pivot_table <- subset(trends_pivot_table, Mean > threshold_mean & Anova_p_value < pVal)
 
   return(trends_pivot_table)
+
 }
