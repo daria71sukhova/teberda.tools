@@ -89,7 +89,7 @@ ltrend <- function(data_file,
   } else {
     # get scaled linear models
     reml_model_list <- get_gls_reml_scaled(wide_t_df)
-    b_and_se <- gls_regcoef_and_se_scaled(scaled_reml_model_list)
+    b_and_se <- gls_regcoef_and_se_scaled(reml_model_list)
   }
 
   # get comparison of models over years and without year predictors
