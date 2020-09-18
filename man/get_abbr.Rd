@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_tidy_data.R
 \name{get_abbr}
 \alias{get_abbr}
-\title{This function allows to get abbreviations of species' names}
+\title{Get abbreviation of species' names if needed}
 \usage{
 get_abbr(sp_name, start1 = 1, end1 = 3, start2 = 1, end2 = 7)
 }

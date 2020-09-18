@@ -1,4 +1,4 @@
-################### Means and Coeffitiets of Variance ##############################
+################### Means and Coeffitiets of Variance and Standard deviation ##############################
 
 # Function get_mean_shoot_number_10
 # Takes data frame without zeros (without_zeros_df)
@@ -8,6 +8,13 @@ get_mean_shoot_number_10 <- function(without_zeros_df, number_of_plots){
   mean_sh_num_10 <- apply(without_zeros_df[, 2:ncol(without_zeros_df)], 2, function(x) round(mean(x*10/number_of_plots), 2))
   return(mean_sh_num_10)
 }
+
+# Function get_sd_sh_num_10
+get_sd_sh_num_10 <- function(without_zeros_df, number_of_plots){
+  sd_sh_num_10 <- apply(without_zeros_df[, 2:ncol(without_zeros_df)], 2, function(x) round(sd(x*10/number_of_plots), 2))
+  return(sd_sh_num_10)
+}
+
 
 # function get_CV_shoot_number_10
 # Takes data frame without zeros (without_zeros_df)
@@ -96,6 +103,7 @@ autocor_max_lag_table <- function(data_file,
 
   # Estimate variation coeffficient
   mean_sh_num_10 <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
+  sd_sh_num_10 <- get_sd_sh_num_10(wide_t_df, number_of_plots)
   CV_sh_num_10 <- get_CV_shoot_number_10(wide_t_df, number_of_plots)
 
   # Estimate autocorrelations
@@ -108,6 +116,7 @@ autocor_max_lag_table <- function(data_file,
   spec_names <- colnames(wide_t_df)[2:ncol(wide_t_df)]
   pivot_table <- data.frame(Species = spec_names,
                             Mean = round(mean_sh_num_10),
+                            SD = sd_sh_num_10,
                             CV = round(CV_sh_num_10, 2)*100,
                             lag = most_sign_lag,
                             R = round(max_acf_sp_ts, 3),
@@ -138,6 +147,7 @@ autocor_1_order_table  <- function(data_file,
                                    pVal = .05){
   wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state)
   mean_sh_num_10 <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
+  sd_sh_num_10 <- get_sd_sh_num_10(wide_t_df, number_of_plots)
   sp_ts <- get_ts(wide_t_df)
   autocorr_lag_1 <- get_autocorr_1(sp_ts)
   box_result <- lapply(1:ncol(sp_ts), function(x) Box.test(sp_ts[,x],
@@ -149,6 +159,7 @@ autocor_1_order_table  <- function(data_file,
   spec_names <- colnames(wide_t_df)[2:ncol(wide_t_df)]
   pivot_table <- data.frame(Species = spec_names,
                             Mean = round(mean_sh_num_10),
+                            SD = sd_sh_num_10,
                             lag = 1,
                             R = round(autocorr_lag_1, 3),
                             p_value = round(box_result_p_val, 3)

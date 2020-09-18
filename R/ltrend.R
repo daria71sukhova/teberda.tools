@@ -75,13 +75,14 @@ ltrend <- function(data_file,
                    scaled = FALSE,
                    need_abbr = FALSE,
                    state = NULL,
-                   threshold_mean = 3.2,
+                   threshold_mean = 10,
                    pVal = 0.05){
   # read data
   wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state)
 
   # get mean number of shoots per 10 square meters
   mean_sh_num_10 <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
+  sd_sh_num_10 <- get_sd_sh_num_10(wide_t_df, number_of_plots)
   if(scaled == F){
     # get non-scaled linear models
     reml_model_list <- get_gls_reml(wide_t_df)
@@ -101,6 +102,7 @@ ltrend <- function(data_file,
 
   trends_pivot_table <- data.frame(Species = spec_names,
                                    Mean = mean_sh_num_10,
+                                   SD = sd_sh_num_10,
                                    B = b_and_se[, 1],
                                    B_SE = b_and_se[, 2],
                                    Anova_p_value = anova_p_val)

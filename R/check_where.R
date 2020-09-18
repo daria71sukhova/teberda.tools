@@ -1,7 +1,7 @@
 #' @title check_where()
 #' @description This function is for check on what sample certain species present and with what frequency.
 #' Also, it can provide when the species was found at the certain sample
-#' @importFrom dplyr
+#' @import dplyr
 #' @param data_file A name of .csv file with the data. No defaults.
 #' @param sp_name A full name of the species as it is provided in the data file. No defaults.
 #' @param sample_pattern A pattern for a certain sample name. Default to NULL.

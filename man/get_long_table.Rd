@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_tidy_data.R
 \name{get_long_table}
 \alias{get_long_table}
-\title{Gets wide table with shoot numbers of every state on every sample
+\title{Long table
+Takes a wide table with shoot numbers of every state on every sample site
 through the years of observation. Returns a tidy long variant of this table}
 \usage{
 get_long_table(wide_table_df)
@@ -12,6 +13,7 @@ get_long_table(wide_table_df)
 get_long_table()}
 }
 \description{
-Gets wide table with shoot numbers of every state on every sample
+Long table
+Takes a wide table with shoot numbers of every state on every sample site
 through the years of observation. Returns a tidy long variant of this table
 }

@@ -11,7 +11,7 @@ ltrend(
   scaled = FALSE,
   need_abbr = FALSE,
   state = NULL,
-  threshold_mean = 3.2,
+  threshold_mean = 10,
   pVal = 0.05
 )
 }

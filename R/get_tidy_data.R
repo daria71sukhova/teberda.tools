@@ -9,7 +9,8 @@ get_sp_fullnames <- function(sp_name){
 }
 
 
-#' This function allows to get abbreviations of species' names
+#' Get abbreviation of species' names if needed
+#' @description This function allows to get abbreviations of species' names
 #' @param sp_name A vector of full latin species names with authors. No defaults.
 #' @param start1 A number for starting symbol in the abbriviation of the genus. Defaults to 1.
 #' @param start2 A number for starting symbol in the abbriviation of the second word. Default to 2.
@@ -24,7 +25,8 @@ get_abbr <- function(sp_name, start1 = 1, end1 = 3, start2 = 1, end2 = 7){
   return(spec_abbr)
 }
 
-#' Gets wide table with shoot numbers of every state on every sample
+#' Long table
+#' Takes a wide table with shoot numbers of every state on every sample site
 #' through the years of observation. Returns a tidy long variant of this table
 #' @importFrom reshape2 melt
 #' @importFrom dplyr mutate
