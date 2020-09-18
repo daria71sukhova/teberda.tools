@@ -8,6 +8,7 @@ ltrend(
   data_file,
   data_file_2 = NULL,
   number_of_plots,
+  scaled = FALSE,
   need_abbr = FALSE,
   state = NULL,
   threshold_mean = 3.2,
