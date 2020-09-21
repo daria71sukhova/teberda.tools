@@ -103,6 +103,7 @@ ltrend <- function(data_file,
   trends_pivot_table <- data.frame(Species = spec_names,
                                    Mean = mean_sh_num_10,
                                    SD = sd_sh_num_10,
+                                   get_mean_sd_shoot_number_10_fl(wide_t_df, number_of_plots),
                                    B = b_and_se[, 1],
                                    B_SE = b_and_se[, 2],
                                    Anova_p_value = anova_p_val)

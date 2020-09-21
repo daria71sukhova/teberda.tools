@@ -1,29 +1,3 @@
-################### Means and Coeffitiets of Variance and Standard deviation ##############################
-
-# Function get_mean_shoot_number_10
-# Takes data frame without zeros (without_zeros_df)
-#   and number of 1-square-meter plots for the phytocenosis of question
-# Returns means for shoot numbers per 10 m2 for all observation period
-get_mean_shoot_number_10 <- function(without_zeros_df, number_of_plots){
-  mean_sh_num_10 <- apply(without_zeros_df[, 2:ncol(without_zeros_df)], 2, function(x) round(mean(x*10/number_of_plots), 2))
-  return(mean_sh_num_10)
-}
-
-# Function get_sd_sh_num_10
-get_sd_sh_num_10 <- function(without_zeros_df, number_of_plots){
-  sd_sh_num_10 <- apply(without_zeros_df[, 2:ncol(without_zeros_df)], 2, function(x) round(sd(x*10/number_of_plots), 2))
-  return(sd_sh_num_10)
-}
-
-
-# function get_CV_shoot_number_10
-# Takes data frame without zeros (without_zeros_df)
-#   and number of 1-square-meter plots for the phytocenosis of question
-# Returns variation coeffitients for shoot numbers per 10 m2
-get_CV_shoot_number_10 <- function(without_zeros_df, number_of_plots){
-  CV_sh_num_10 <- apply(without_zeros_df[, 2:ncol(without_zeros_df)], 2, function(x) round(sd(10*x/number_of_plots)/mean(x*10/number_of_plots), 2))
-  return(CV_sh_num_10)
-}
 
 ######################### Autocorrelations ##########################
 
