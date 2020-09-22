@@ -11,7 +11,7 @@ get_mean_shoot_number_10 <- function(without_zeros_df, number_of_plots){
 
 get_mean_sd_shoot_number_10_fl <- function(without_zeros_df, number_of_plots){
   first3 <- without_zeros_df[1:3,]
-  last3 <- without_zeros_df[nrow((without_zeros_df)-2):nrow(without_zeros_df),]
+  last3 <- without_zeros_df[(nrow(without_zeros_df)-2):nrow(without_zeros_df),]
   mean_sh_num_10_first <- apply(first3[, 2:ncol(without_zeros_df)], 2, function(x) round(mean(x*10/number_of_plots), 2))
   sd_sh_num_10_first <- apply(first3[, 2:ncol(without_zeros_df)], 2, function(x) round(sd(x*10/number_of_plots), 2))
   mean_sh_num_10_last <- apply(last3[, 2:ncol(without_zeros_df)], 2, function(x) round(mean(x*10/number_of_plots), 2))
