@@ -14,7 +14,7 @@ get_ts <- function(without_zeros_df){
 # Returns maximum of autocorrelation coeffitients with lag != 0
 get_max_acf <- function(sp_ts){
   acf_sp_ts <- lapply(1:ncol(sp_ts), function(x) acf(sp_ts[,x], plot=F))
-  max_acf_sp_ts <- sapply(1:length(acf_sp_ts), function(x) max(acf_sp_ts[[x]]$acf[acf_sp_ts[[x]]$lag!=0]))
+  max_acf_sp_ts <- sapply(1:length(acf_sp_ts), function(x) max(acf_sp_ts[[x]]$acf[abs(acf_sp_ts[[x]]$lag) != 0]))
   return(max_acf_sp_ts)
 }
 
@@ -22,7 +22,6 @@ get_max_acf <- function(sp_ts){
 get_autocorr_1 <- function(sp_ts){
   acf_sp_ts <- lapply(1:ncol(sp_ts), function(x) acf(sp_ts[,x], plot=F))
   autocor_1 <- sapply(1:length(acf_sp_ts), function(x) acf_sp_ts[[x]][["acf"]][2])
-  #eturn(autocor_1)
   return(autocor_1)
 }
 
@@ -31,7 +30,6 @@ get_autocorr_1 <- function(sp_ts){
 # Takes sp_ts
 # Returns the most significant lags
 get_most_sign_lag <- function(sp_ts, max_acf_sp_ts){
-  # sp_ts <- sapply(1:ncol(without_zeros_df), function(x) ts(without_zeros_df[,x]))
   acf_sp_ts <- lapply(1:ncol(sp_ts), function(x) acf(sp_ts[,x], plot=F))
   most_sign_lag <- sapply(1:length(max_acf_sp_ts),
                           function(x) acf_sp_ts[[x]]$lag[acf_sp_ts[[x]]$acf == max_acf_sp_ts[x]])
@@ -71,7 +69,7 @@ autocor_max_lag_table <- function(data_file,
                                   need_abbr = FALSE,
                                   state = NULL,
                                   maxLag = 1,
-                                  mean_threshold = 3.2,
+                                  mean_threshold = 10,
                                   pVal = .05){
   wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state)
 
@@ -117,7 +115,7 @@ autocor_1_order_table  <- function(data_file,
                                    number_of_plots,
                                    need_abbr = FALSE,
                                    state = NULL,
-                                   mean_threshold = 3.2,
+                                   mean_threshold = 10,
                                    pVal = .05){
   wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state)
   mean_sh_num_10 <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
@@ -168,7 +166,7 @@ autocorrelations <- function(data_file,
                              need_abbr = FALSE,
                              state = NULL,
                              maxLag = 1,
-                             mean_threshold = 3.2,
+                             mean_threshold = 10,
                              pVal = .05){
   if(what_autocorr == "max_lag"){ return(autocor_max_lag_table(data_file,
                                                                data_file_2,
@@ -184,6 +182,7 @@ autocorrelations <- function(data_file,
                                       number_of_plots,
                                       need_abbr,
                                       state,
+                                      mean_threshold,
                                       pVal)) }
   }
 }
