@@ -14,7 +14,7 @@ get_ts <- function(without_zeros_df){
 # Returns maximum of autocorrelation coeffitients with lag != 0
 get_max_acf <- function(sp_ts){
   acf_sp_ts <- lapply(1:ncol(sp_ts), function(x) acf(sp_ts[,x], plot=F))
-  max_acf_sp_ts <- sapply(1:length(acf_sp_ts), function(x) max(acf_sp_ts[[x]]$acf[abs(acf_sp_ts[[x]]$lag) != 0]))
+  max_acf_sp_ts <- sapply(1:length(acf_sp_ts), function(x) max(abs(acf_sp_ts[[x]]$acf[acf_sp_ts[[x]]$lag != 0])))
   return(max_acf_sp_ts)
 }
 
