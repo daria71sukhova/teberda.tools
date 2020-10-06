@@ -9,18 +9,27 @@ get_ts <- function(without_zeros_df){
   return(sp_ts)
 }
 
+# functon get_acf
+# Takes the matrix of the time series for the species
+# Returns the list of acf values for each species
+get_acf <- function(sp_ts){
+  acf_sp_ts <- lapply(1:ncol(sp_ts), function(x) acf(sp_ts[,x], plot=F))
+  return(acf_sp_ts)
+}
 # function get_max_acf
 # Takes sp_ts
 # Returns maximum of autocorrelation coeffitients with lag != 0
 get_max_acf <- function(sp_ts){
-  acf_sp_ts <- lapply(1:ncol(sp_ts), function(x) acf(sp_ts[,x], plot=F))
-  max_acf_sp_ts <- sapply(1:length(acf_sp_ts), function(x) max(acf_sp_ts[[x]]$acf[acf_sp_ts[[x]]$lag != 0]))
+  acf_sp_ts <- get_acf(sp_ts)
+  max_acf_sp_ts <- sapply(1:length(acf_sp_ts), function(x) max(abs(acf_sp_ts[[x]]$acf[acf_sp_ts[[x]]$lag > 0])))
+  max_acf_sp_ts <- sapply(1:length(acf_sp_ts),
+                          function(x)(acf_sp_ts[[x]]$acf[abs(acf_sp_ts[[x]]$acf) == max_acf_sp_ts[x]]))
   return(max_acf_sp_ts)
 }
 
 # Function get_autocorr_1
 get_autocorr_1 <- function(sp_ts){
-  acf_sp_ts <- lapply(1:ncol(sp_ts), function(x) acf(sp_ts[,x], plot=F))
+  acf_sp_ts <- get_acf(sp_ts)
   autocor_1 <- sapply(1:length(acf_sp_ts), function(x) acf_sp_ts[[x]][["acf"]][2])
   return(autocor_1)
 }
@@ -30,12 +39,11 @@ get_autocorr_1 <- function(sp_ts){
 # Takes sp_ts
 # Returns the most significant lags
 get_most_sign_lag <- function(sp_ts, max_acf_sp_ts){
-  acf_sp_ts <- lapply(1:ncol(sp_ts), function(x) acf(sp_ts[,x], plot=F))
+  acf_sp_ts <- get_acf(sp_ts)
   most_sign_lag <- sapply(1:length(max_acf_sp_ts),
                           function(x) acf_sp_ts[[x]]$lag[acf_sp_ts[[x]]$acf == max_acf_sp_ts[x]])
   return(most_sign_lag)
 }
-
 
 # function get_Lij_Box_test
 # Takes sp_ts
