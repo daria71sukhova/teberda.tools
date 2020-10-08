@@ -18,7 +18,7 @@ flat_cor_mat <- function(cor_r, cor_p){
 
 #' @title speccorr
 #' @description Correlations between species.
-#' Helper function \code flat_cor_mat \code comes from
+#' Helper function `flat_cor_mat` comes from
 #' https://rstudio-pubs-static.s3.amazonaws.com/240657_5157ff98e8204c358b2118fa69162e18.html
 #' Rename columns added.
 #' @param data_file Name of .csv file with data. No defaults.
