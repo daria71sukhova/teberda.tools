@@ -20,7 +20,6 @@ flat_cor_mat <- function(cor_r, cor_p){
 #' @description Correlations between species.
 #' Helper function `flat_cor_mat` comes from
 #' https://rstudio-pubs-static.s3.amazonaws.com/240657_5157ff98e8204c358b2118fa69162e18.html
-#' Rename columns added.
 #' @param data_file Name of .csv file with data. No defaults.
 #' @param data_file_2 Name of second .csv file to be united with the first one.
 #' It must be checked, that the data are from the SAME period.
