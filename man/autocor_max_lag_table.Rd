@@ -11,7 +11,7 @@ autocor_max_lag_table(
   need_abbr = FALSE,
   state = NULL,
   maxLag = 1,
-  mean_threshold = 3.2,
+  mean_threshold = 10,
   pVal = 0.05
 )
 }

@@ -10,7 +10,7 @@ autocor_1_order_table(
   number_of_plots,
   need_abbr = FALSE,
   state = NULL,
-  mean_threshold = 3.2,
+  mean_threshold = 10,
   pVal = 0.05
 )
 }
