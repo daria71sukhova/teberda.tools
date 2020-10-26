@@ -31,6 +31,10 @@ Default to NULL}
 "v" for vegetative,
 "v+j" for vegetative and juvenile.
 Default to NULL.}
+
+\item{first_year}{The first year of the period. Default to NULL.}
+
+\item{last_year}{The last year of the period. Default to NULL.}
 }
 \description{
 Takes one ore two .csv files

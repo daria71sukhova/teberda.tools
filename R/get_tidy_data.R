@@ -239,6 +239,8 @@ high_plus_low <- function(csv_file, csv_file_2, need_abbr = NULL, state = NULL){
 #' "v" for vegetative,
 #' "v+j" for vegetative and juvenile.
 #' Default to NULL.
+#' @param first_year The first year of the period. Default to NULL.
+#' @param last_year The last year of the period. Default to NULL.
 #' @export
 get_tidy_data <- function(csv_file,
                           csv_file_2 = NULL,
