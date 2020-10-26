@@ -8,7 +8,7 @@ ltrend(
   data_file,
   data_file_2 = NULL,
   number_of_plots,
-  scaled = FALSE,
+  scaled = TRUE,
   need_abbr = FALSE,
   state = NULL,
   threshold_mean = 10,
@@ -23,6 +23,8 @@ It must be checked, that the data are from the SAME period.
 Default to NULL}
 
 \item{number_of_plots}{Number of 1square meter plots in sampled area. No defaults}
+
+\item{scaled}{Boolean. Whether to carry out calculations based on scaled values. Default to TRUE.}
 
 \item{need_abbr}{Boolean. Whether species names should be abbreviated. Default to FALSE.}
 
