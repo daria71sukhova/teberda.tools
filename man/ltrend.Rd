@@ -12,7 +12,8 @@ ltrend(
   need_abbr = FALSE,
   state = NULL,
   threshold_mean = 10,
-  pVal = 0.05
+  pVal = 0.05,
+  ...
 )
 }
 \arguments{

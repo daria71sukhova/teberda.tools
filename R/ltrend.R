@@ -77,9 +77,10 @@ ltrend <- function(data_file,
                    need_abbr = FALSE,
                    state = NULL,
                    threshold_mean = 10,
-                   pVal = 0.05){
+                   pVal = 0.05,
+                   ...){
   # read data
-  wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state)
+  wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state, ...)
 
   # get mean number of shoots per 10 square meters
   mean_sh_num_10 <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
