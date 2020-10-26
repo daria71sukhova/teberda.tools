@@ -38,5 +38,4 @@ Data frame with correlation coefficients and their p.values between species
 Correlations between species.
 Helper function `flat_cor_mat` comes from
 https://rstudio-pubs-static.s3.amazonaws.com/240657_5157ff98e8204c358b2118fa69162e18.html
-Rename columns added.
 }
