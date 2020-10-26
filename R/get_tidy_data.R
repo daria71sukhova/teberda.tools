@@ -9,6 +9,11 @@ get_sp_fullnames <- function(sp_name){
   return(sp_f_name)
 }
 
+# select_period
+select_period <- function(df_data, first_year, last_year){
+  df_for_period <- df_data %>% filter(year %in% c(first_year:last_year))
+  return(df_for_period)
+}
 
 #' Get abbreviation of species' names if needed
 #' @description This function allows to get abbreviations of species' names
@@ -235,8 +240,27 @@ high_plus_low <- function(csv_file, csv_file_2, need_abbr = NULL, state = NULL){
 #' "v+j" for vegetative and juvenile.
 #' Default to NULL.
 #' @export
-get_tidy_data <- function(csv_file, csv_file_2 = NULL, need_abbr = FALSE, state = NULL){
+get_tidy_data <- function(csv_file,
+                          csv_file_2 = NULL,
+                          need_abbr = FALSE,
+                          state = NULL,
+                          first_year = NULL,
+                          last_year = NULL){
   if(!is.null(csv_file_2)){
-    return(high_plus_low(csv_file, csv_file_2, need_abbr, state))
-  } else { return(get_tidy(csv_file, need_abbr, state))}
+    data_df <- high_plus_low(csv_file = csv_file, csv_file_2 = csv_file_2, need_abbr = need_abbr, state = state)
+    if(!is.null(first_year) && !is.null(last_year)){
+      data_df <- (select_period(data_df, first_year = first_year, last_year = last_year))
+      return(data_df)
+    } else {
+      return(data_df)
+    }
+  } else {
+    data_df <- get_tidy(csv_file, need_abbr, state)
+    if(!is.null(first_year) && !is.null(last_year)){
+      data_df <- (select_period(data_df, first_year = first_year, last_year = last_year))
+      return(data_df)
+    } else {
+      return(data_df)
+    }
+  }
 }
