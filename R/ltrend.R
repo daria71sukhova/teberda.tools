@@ -58,6 +58,7 @@ gls_regcoef_and_se_scaled <- function(model_sum_list_scaled){
 #' It must be checked, that the data are from the SAME period.
 #' Default to NULL
 #' @param number_of_plots Number of 1square meter plots in sampled area. No defaults
+#' @param scaled Boolean. Whether to carry out calculations based on scaled values. Default to TRUE.
 #' @param need_abbr Boolean. Whether species names should be abbreviated. Default to FALSE.
 #' @param state Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
 #'  Which states should be selected. If NULL, all shoots will be selected.
@@ -72,7 +73,7 @@ gls_regcoef_and_se_scaled <- function(model_sum_list_scaled){
 ltrend <- function(data_file,
                    data_file_2 = NULL,
                    number_of_plots,
-                   scaled = FALSE,
+                   scaled = TRUE,
                    need_abbr = FALSE,
                    state = NULL,
                    threshold_mean = 10,

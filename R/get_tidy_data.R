@@ -1,5 +1,6 @@
 # Function takes species' names and cleaves dot from its start, if it is.
 get_sp_fullnames <- function(sp_name){
+  sp_name <- str_squish(sp_name)
   if(!grep("^\\.", sp_name)){
     sp_f_name <- sp_name
   } else {
