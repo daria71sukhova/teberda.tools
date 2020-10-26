@@ -252,6 +252,7 @@ get_tidy_data <- function(csv_file,
     data_df <- high_plus_low(csv_file = csv_file, csv_file_2 = csv_file_2, need_abbr = need_abbr, state = state)
     if(!is.null(first_year) && !is.null(last_year)){
       data_df <- (select_period(data_df, first_year = first_year, last_year = last_year))
+      data_df <- data_df[, which(colMeans(data_df) > 0)]
       return(data_df)
     } else {
       return(data_df)
@@ -260,6 +261,7 @@ get_tidy_data <- function(csv_file,
     data_df <- get_tidy(csv_file, need_abbr, state)
     if(!is.null(first_year) && !is.null(last_year)){
       data_df <- (select_period(data_df, first_year = first_year, last_year = last_year))
+      data_df <- data_df[, which(colMeans(data_df) > 0)]
       return(data_df)
     } else {
       return(data_df)
