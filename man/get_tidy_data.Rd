@@ -8,7 +8,14 @@ Returns tidy wide table with selected types of shoots:
    The first column is named "year", containes years.
    Rows contain shoot numbers of species for a year.}
 \usage{
-get_tidy_data(csv_file, csv_file_2 = NULL, need_abbr = FALSE, state = NULL)
+get_tidy_data(
+  csv_file,
+  csv_file_2 = NULL,
+  need_abbr = FALSE,
+  state = NULL,
+  first_year = NULL,
+  last_year = NULL
+)
 }
 \arguments{
 \item{csv_file}{Name of .csv file containes raw data. No default.}
