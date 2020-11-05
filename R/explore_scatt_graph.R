@@ -24,6 +24,7 @@ shoots_scatter_plot <- function(
   tr_line = lm,
   plot_title = sp_name,
   mute_ax_lab = TRUE,
+  scaled = FALSE,
   ...){
   # Takes dataframe
   # chooses columns "year" and species name
@@ -34,7 +35,7 @@ shoots_scatter_plot <- function(
   shoots <- shoots %>% select(year, sp_name)
 
   # make plots for every state
-  sh_scat_plot <- ggplot(shoots, aes(x = year, y = shoots[, 2])) +
+  sh_scat_plot <- ggplot(shoots, aes(x = year, y = ifelse(scaled, scale(shoots[, 2]), shoots[, 2]))) +
     geom_point() +
     geom_smooth(method = tr_line) +
     labs(title = plot_title, x = "Year", y = "Number of shoots")
