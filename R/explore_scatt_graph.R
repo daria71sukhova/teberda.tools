@@ -32,7 +32,7 @@ shoots_scatter_plot <- function(
   shoots <- get_tidy_data(csv_high, csv_low, state = state)
 
   # choose data about a certain species
-  shoots <- shoots %>% select(year, sp_name)
+  shoots <- shoots %>% select(year, all_of(sp_name))
 
   # make plots for every state
   sh_scat_plot <- ggplot(shoots, aes(x = year, y = ifelse(scaled, scale(shoots[, 2]), shoots[, 2]))) +
@@ -45,6 +45,49 @@ shoots_scatter_plot <- function(
   }
 
   return(sh_scat_plot)
+}
+
+# Function shoots_as_line
+#' @title Lines for numbers of shoots
+#' @description Plot a line for the number of shoots in the years of observation.
+#' @param csv_high Name of .csv file with data. No defaults.
+#' @param csv_low Name of second .csv file. Default to NULL
+#' @param state Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
+#'  Which states should be selected. If NULL, all shoots will be selected.
+#'  Dafault to NULL.
+#' @param plot_title The main title of the plot. No default.
+#' @param mute_ax_lab Boolean. Whether we should mute axis names to each indivdual scatterplot.
+#' Default to TRUE.
+#' @importFrom data.table melt
+#' @return ggplot2 object with line
+#' @export
+shoots_as_line <- function(
+                          csv_high,
+                          csv_low = NULL,
+                          sp_name,
+                          state = NULL,
+                          tr_line = lm,
+                          plot_title = sp_name,
+                          mute_ax_lab = TRUE,
+                          scaled = FALSE,
+                          ...
+                          ){
+  shoots <- get_tidy_data(csv_high, csv_low, state = state)
+
+  # choose data about a certain species
+  shoots <- shoots %>% select(year, all_of(sp_name))
+  shoots_long <- melt(shoots, id = year, variable.name = "species", value.name = "num_of_shoots")
+
+  # make plots for every state
+  sh_line <- ggplot(shoots_long, aes(x = year, y = num_of_shoots, group = species, colour = species)) +
+    geom_line() +
+    labs(title = plot_title, x = "Year", y = "Number of shoots")
+  if(mute_ax_lab == TRUE){
+    sh_line <- sh_line +
+      theme(axis.title.x = element_blank(), axis.title.y = element_blank())
+  }
+
+  return(sh_line)
 }
 
 # Put several plots into the object list
