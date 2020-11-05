@@ -66,10 +66,9 @@ shoots_as_line <- function(
                           csv_low = NULL,
                           sp_name,
                           state = NULL,
-                          tr_line = lm,
                           plot_title = sp_name,
-                          mute_ax_lab = TRUE,
-                          scaled = FALSE,
+                          mute_ax_lab = FALSE,
+                          scaled = TRUE,
                           ...
                           ){
   shoots <- get_tidy_data(csv_high, csv_low, state = state)
