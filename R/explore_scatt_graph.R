@@ -56,7 +56,7 @@ shoots_scatter_plot <- function(
 #' @param state Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
 #'  Which states should be selected. If NULL, all shoots will be selected.
 #'  Dafault to NULL.
-#' @param loged Boolean. Whether the logarithm of number of shoots should be taken. Defaul to TRUE.
+#' @param loged Boolean. Whether the logarithm of number of shoots should be taken. Defaul to FALSE.
 #' @param plot_title The main title of the plot. No default.
 #' @param mute_ax_lab Boolean. Whether we should mute axis names to each indivdual scatterplot.
 #' Default to TRUE.
@@ -70,7 +70,7 @@ shoots_as_line <- function(
                           state = NULL,
                           plot_title = NULL,
                           mute_ax_lab = FALSE,
-                          loged = TRUE,
+                          loged = FALSE,
                           ...
                           ){
   shoots <- get_tidy_data(csv_high, csv_low, state = state)

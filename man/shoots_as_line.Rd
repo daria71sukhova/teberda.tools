@@ -11,7 +11,7 @@ shoots_as_line(
   state = NULL,
   plot_title = NULL,
   mute_ax_lab = FALSE,
-  loged = TRUE,
+  loged = FALSE,
   ...
 )
 }
@@ -31,7 +31,7 @@ Dafault to NULL.}
 \item{mute_ax_lab}{Boolean. Whether we should mute axis names to each indivdual scatterplot.
 Default to TRUE.}
 
-\item{loged}{Boolean. Whether the logarithm of number of shoots should be taken. Defaul to TRUE.}
+\item{loged}{Boolean. Whether the logarithm of number of shoots should be taken. Defaul to FALSE.}
 }
 \value{
 ggplot2 object with line
