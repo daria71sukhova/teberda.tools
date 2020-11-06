@@ -7,12 +7,11 @@
 shoots_as_line(
   csv_high,
   csv_low = NULL,
-  sp_name,
+  sp_names,
   state = NULL,
-  tr_line = lm,
-  plot_title = sp_name,
-  mute_ax_lab = TRUE,
-  scaled = FALSE,
+  plot_title = NULL,
+  mute_ax_lab = FALSE,
+  loged = TRUE,
   ...
 )
 }
@@ -20,6 +19,8 @@ shoots_as_line(
 \item{csv_high}{Name of .csv file with data. No defaults.}
 
 \item{csv_low}{Name of second .csv file. Default to NULL}
+
+\item{sp_names}{A character vector with the names of the species of interest}
 
 \item{state}{Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
 Which states should be selected. If NULL, all shoots will be selected.
@@ -29,6 +30,8 @@ Dafault to NULL.}
 
 \item{mute_ax_lab}{Boolean. Whether we should mute axis names to each indivdual scatterplot.
 Default to TRUE.}
+
+\item{loged}{Boolean. Whether the logarithm of number of shoots should be taken. Defaul to TRUE.}
 }
 \value{
 ggplot2 object with line

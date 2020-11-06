@@ -52,35 +52,42 @@ shoots_scatter_plot <- function(
 #' @description Plot a line for the number of shoots in the years of observation.
 #' @param csv_high Name of .csv file with data. No defaults.
 #' @param csv_low Name of second .csv file. Default to NULL
+#' @param sp_names A character vector with the names of the species of interest
 #' @param state Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
 #'  Which states should be selected. If NULL, all shoots will be selected.
 #'  Dafault to NULL.
+#' @param loged Boolean. Whether the logarithm of number of shoots should be taken. Defaul to TRUE.
 #' @param plot_title The main title of the plot. No default.
 #' @param mute_ax_lab Boolean. Whether we should mute axis names to each indivdual scatterplot.
 #' Default to TRUE.
-#' @importFrom data.table melt
+#' @importFrom reshape2 melt
 #' @return ggplot2 object with line
 #' @export
 shoots_as_line <- function(
                           csv_high,
                           csv_low = NULL,
-                          sp_name,
+                          sp_names,
                           state = NULL,
-                          plot_title = sp_name,
+                          plot_title = NULL,
                           mute_ax_lab = FALSE,
-                          scaled = TRUE,
+                          loged = TRUE,
                           ...
                           ){
   shoots <- get_tidy_data(csv_high, csv_low, state = state)
 
-  # choose data about a certain species
-  shoots <- shoots %>% select(year, all_of(sp_name))
-  shoots_long <- melt(shoots, id = year, variable.name = "species", value.name = "num_of_shoots")
+  # choose data about certain species
+  shoots <- shoots %>% select(year, all_of(sp_names))
+  shoots_long <- melt(shoots, id = "year", variable.name = "species", value.name = "num_of_shoots")
+  if(loged) shoots_long$num_of_shoots <- log10(shoots_long$num_of_shoots)
 
   # make plots for every state
-  sh_line <- ggplot(shoots_long, aes(x = year, y = num_of_shoots, group = species, colour = species)) +
+  sh_line <- ggplot(shoots_long, aes(x = year,
+                                     y = num_of_shoots,
+                                     group = species, colour = species)) +
     geom_line() +
-    labs(title = plot_title, x = "Year", y = "Number of shoots")
+    labs(title = plot_title, x = "Year", y = "Number of shoots") +
+    theme_bw()
+
   if(mute_ax_lab == TRUE){
     sh_line <- sh_line +
       theme(axis.title.x = element_blank(), axis.title.y = element_blank())
