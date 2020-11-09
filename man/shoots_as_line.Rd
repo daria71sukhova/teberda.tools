@@ -12,6 +12,8 @@ shoots_as_line(
   plot_title = NULL,
   mute_ax_lab = FALSE,
   loged = FALSE,
+  summed = FALSE,
+  sp_summed = NULL,
   ...
 )
 }
@@ -32,6 +34,11 @@ Dafault to NULL.}
 Default to TRUE.}
 
 \item{loged}{Boolean. Whether the logarithm of number of shoots should be taken. Defaul to FALSE.}
+
+\item{summed}{Boolean. Whether the numbers of shoots for several species should be calculated. Default to FALSE.}
+
+\item{sp_summed}{A character vector with the names of the soecies which should be summed.
+Only if 'summed' parameter is TRUE. Default to NULL.}
 }
 \value{
 ggplot2 object with line

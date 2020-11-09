@@ -60,6 +60,9 @@ shoots_scatter_plot <- function(
 #' @param plot_title The main title of the plot. No default.
 #' @param mute_ax_lab Boolean. Whether we should mute axis names to each indivdual scatterplot.
 #' Default to TRUE.
+#' @param summed Boolean. Whether the numbers of shoots for several species should be calculated. Default to FALSE.
+#' @param sp_summed A character vector with the names of the soecies which should be summed.
+#' Only if 'summed' parameter is TRUE. Default to NULL.
 #' @importFrom reshape2 melt
 #' @return ggplot2 object with line
 #' @export
@@ -71,14 +74,26 @@ shoots_as_line <- function(
                           plot_title = NULL,
                           mute_ax_lab = FALSE,
                           loged = FALSE,
+                          summed = FALSE,
+                          sp_summed = NULL,
                           ...
                           ){
   shoots <- get_tidy_data(csv_high, csv_low, state = state)
 
   # choose data about certain species
-  shoots <- shoots %>% select(year, all_of(sp_names))
+
+  if(summed) {
+    .vars <- syms(sp_summed)
+    shoots <- shoots %>% select(year, all_of(sp_names), all_of(sp_summed))
+    shoots <- shoots %>% rowwise() %>% mutate(spec_summed = sum(!!!(.vars)))
+    shoots <- shoots %>% select(-all_of(sp_summed))
+
+  } else {
+    shoots <- shoots %>% select(year, all_of(sp_names))
+  }
+
   shoots_long <- melt(shoots, id = "year", variable.name = "species", value.name = "num_of_shoots")
-  if(loged) shoots_long$num_of_shoots <- log10(shoots_long$num_of_shoots)
+  if(loged) shoots_long$num_of_shoots <- log(shoots_long$num_of_shoots)
 
   # make plots for every state
   sh_line <- ggplot(shoots_long, aes(x = year,
