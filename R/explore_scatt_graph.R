@@ -99,6 +99,7 @@ shoots_as_line <- function(
   sh_line <- ggplot(shoots_long, aes(x = year,
                                      y = num_of_shoots,
                                      group = species, colour = species)) +
+    geom_point() +
     geom_line() +
     labs(title = plot_title, x = "Year", y = "Number of shoots") +
     theme_bw()
