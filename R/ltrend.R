@@ -62,10 +62,10 @@ gls_regcoef_and_se_scaled <- function(model_sum_list_scaled){
 #' @param need_abbr Boolean. Whether species names should be abbreviated. Default to FALSE.
 #' @param state Character. "g" - generative, "v" - vegetative, "v+j" - vegetative and juvenile.
 #'  Which states should be selected. If NULL, all shoots will be selected.
-#'  Dafault to NULL.
-#' @param mean_threshold Number. Mean shoot number threshhold
+#'  Default to NULL.
+#' @param mean_threshold Number. Mean shoot number threshold
 #'  for species to be taken into consideration. Default to 3.2.
-#' @param pVal Number (0.05, 0.01 or less). p-value of anovaANOVA comparing two gls models compared with ML methods
+#' @param pVal Number (0.05, 0.01 or less). p-value of ANOVA comparing two gls models compared with ML methods
 #'  for species to be taken into consideration. Default to 0.05.
 #' @return dataframe with linear trends parameters
 #' @export
@@ -73,6 +73,7 @@ gls_regcoef_and_se_scaled <- function(model_sum_list_scaled){
 ltrend <- function(data_file,
                    data_file_2 = NULL,
                    number_of_plots,
+                   per_sample = c("one_sq_m", "ten_sq_m", "whole_plot"),
                    scaled = TRUE,
                    need_abbr = FALSE,
                    state = NULL,
@@ -82,10 +83,28 @@ ltrend <- function(data_file,
   # read data
   wide_t_df <- get_tidy_data(data_file, data_file_2, need_abbr, state, ...)
 
-  # get mean number of shoots per 10 square meters
-  mean_sh_num_10 <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
-  sd_sh_num_10 <- get_sd_sh_num_10(wide_t_df, number_of_plots)
-  if(scaled == F){
+  # get mean number of shoots:
+  per_sample <- match.arg(per_sample)
+  switch(per_sample,
+         "one_sq_m" <- {
+           mean_sh_num <- get_mean_shoot_number_1(wide_t_df, number_of_plots)
+           sd_sh_num <- get_sd_sh_num_1(wide_t_df, number_of_plots)
+           mean_sd_shoot_num <- get_mean_sd_shoot_number_1_fl(wide_t_df, number_of_plots)
+         }
+         "ten_sq_m" <- {
+           mean_sh_num <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
+           sd_sh_num <- get_sd_sh_num_10(wide_t_df, number_of_plots)
+           mean_sd_shoot_num <- get_mean_sd_shoot_number_10_fl(wide_t_df, number_of_plots)
+         }
+         "whole_plot" <- {
+           mean_sh_num <- get_mean_shoot_number(wide_t_df, number_of_plots)
+           sd_sh_num <- get_sd_sh_num(wide_t_df, number_of_plots)
+           mean_sd_shoot_num <- get_mean_sd_shoot_number_fl(wide_t_df, number_of_plots)
+         },
+         stop("Please, choose between 'one_sq_m', 'ten_sq_m' or 'whole_plot'!")
+  )
+ # Whether the model should be scaled or not:
+    if(scaled == F){
     # get non-scaled linear models
     reml_model_list <- get_gls_reml(wide_t_df)
     b_and_se <- gls_regcoef_and_se(reml_model_list)
@@ -101,15 +120,13 @@ ltrend <- function(data_file,
 
   # get pivot table about trends
   spec_names <- colnames(wide_t_df)[2:ncol(wide_t_df)]
-
   trends_pivot_table <- data.frame(Species = spec_names,
-                                   Mean = mean_sh_num_10,
-                                   SD = sd_sh_num_10,
-                                   get_mean_sd_shoot_number_10_fl(wide_t_df, number_of_plots),
+                                   Mean = mean_sh_num,
+                                   SD = sd_sh_num,
+                                   mean_sd_shoot_num,
                                    B = b_and_se[, 1],
                                    B_SE = b_and_se[, 2],
                                    Anova_p_value = anova_p_val)
-
   trends_pivot_table <- subset(trends_pivot_table, Mean > threshold_mean & Anova_p_value < pVal)
 
   return(trends_pivot_table)
