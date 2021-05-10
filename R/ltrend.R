@@ -90,12 +90,12 @@ ltrend <- function(data_file,
            mean_sh_num <- get_mean_shoot_number_1(wide_t_df, number_of_plots)
            sd_sh_num <- get_sd_sh_num_1(wide_t_df, number_of_plots)
            mean_sd_shoot_num <- get_mean_sd_shoot_number_1_fl(wide_t_df, number_of_plots)
-         }
+         },
          "ten_sq_m" <- {
            mean_sh_num <- get_mean_shoot_number_10(wide_t_df, number_of_plots)
            sd_sh_num <- get_sd_sh_num_10(wide_t_df, number_of_plots)
            mean_sd_shoot_num <- get_mean_sd_shoot_number_10_fl(wide_t_df, number_of_plots)
-         }
+         },
          "whole_plot" <- {
            mean_sh_num <- get_mean_shoot_number(wide_t_df, number_of_plots)
            sd_sh_num <- get_sd_sh_num(wide_t_df, number_of_plots)
